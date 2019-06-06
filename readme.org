@@ -1,0 +1,417 @@
+* 151 revision notes from fall18
+** notes
+I’ve been thinking over the next iteration of the AI class, probably I’ll do ASP + either rust or python.  I want to start with satisfaction then move to optimization and then classification (and showing similar problems addressed by all three kinds of decision making)... and I want to change the planning domain to abstract Zelda dungeons, and the path planning to concrete Zelda dungeons at varying levels of abstraction, and explore nav meshes, jump point search, inventory a*, and possibly rrt.  The main thing is I want to have 12 small assignments (not necessarily all coding assignments) instead of five giant ones.  Some of these I’ll shave off the current ones and some I’ll make over the spring.  I do still want the Minecraft craft planning in there though to show off constraint programming approaches to planning problems... so I’ve gotta think about it some.  Mario is also a useful domain to show complete map path planning (concretely or abstractly) vs receding horizon control vs abstracting it to a graph...
+
+Move some/much reflection content into lectures for active learning
+Reduce grading overhead by scoring correctness on unit test achievement and automate that, and by scoring completion on a student synopsis of what they did and how it worked or what they tried in the repository’s readme.  Peer review is the only code level feedback.  If I say I only care about conceptual understanding I should put my money where my mouth is.
+Moving some reflections out could help maintain assignment size but it’s probably better to have 10 assignments anyway
+Make quizzes very low stakes (5%) or zero (that way I don’t have to grade them) but introduce either lecture summaries or reading responses and more readings?  Or increase HW or project weight or have a midterm or final assembled from quiz questions.
+** satisfaction / optimization / prediction
+*** problem types: transformations / systems / agents
+*** e.g. satisfaction:
+- transformations: single step LP or pcg via sat or...
+- systems: model checking, IW, satisficing planning, graph search, etc; worlds that evolve over time
+- agents: utility systems, rrt
+*** optimization:
+- LP/ILP revisited, soft constraints, plus genetic search, local search, ...
+- metric planning, a* and variants, planning via ilp, minimax, mcts
+- reactive planning, teaming, rl
+*** prediction
+- regression, classification, wfc-prob ...
+- heuristic learning, rl with approximated functions
+- transfer, induction
+** Topics
+*** Satisfaction
+**** CSPs, maybe wfc and graph grammars
+ASP house; rust CHR?? Or rust integer FD solver?  Or rust graph grammars (perhaps via CHR), or do graph mission grammar but save map layout until optimization to get soft constraints?  Zelda room solver/conjecturer?  RPG team example?
+**** Planning by CSP; Classical planning, IW
+Zelda dungeon solver by room?  Minecraft planner by iw?
+**** Behavior trees and rule based agents? Steering and braitenberg vehickes?
+- committed choice forward reasoning agents
+- fsms, goap(?)
+- Mario as a set of local reactive rules from pixels?
+*** Optimization
+**** Optimizing CSPs, local search
+Branch and bound, min conflicts, genetic programming; mission embedding onto space with soft and hard constraints; notion of preferences
+**** Metric planning by CSP; Path and motion planning
+- Minecraft CSP planner
+- A* and an extension
+- RRT
+**** Utility AI
+CiF
+*** Prediction
+**** Regression and ML, Probabilistic programming
+Charda/mappy??
+**** Game playing/minimax/mcts
+**** RL, MPC
+* Grading
+- 10% ethical review (pod)
+- 10% technical review (pod)
+- 10% weekly lecture summaries/quizzes
+- 10% reading summaries
+- 30% hw
+- 30% project
+* Outcomes
+** What students should know
+*** AI as automated decision making in a context
+*** this means formulating decision processes as algorithms or specifying them in a logic
+*** and then phrasing problems we care about as those types of decisions, and possibly interpreting and acting on the results of those decisions
+*** (some) types of decision: satisfaction, optimization, prediction
+*** types of context: creation, dynamics, agents
+*** approaches for algorithms (often combined): local and global search (GAs, gradient descent, heuristic search), analysis/abstraction (analytic searchless solutions), rule based systems, function approximation
+** What students should think about
+*** reflect on world models implicit in particular AI techniques and the overall discourse of AI
+*** see similarities and differences between techniques and problems            :compare:
+*** critically analyze uses of AI from problem formulation up to interpreting and acting on results :critique:
+*** consider both domain appropriateness and engineering concerns in knowledge representation
+** What students should be able to do
+*** given a representation, adapt real world problems into data and apply a solver :apply:
+*** given a representation and description of a solver algorithm, write the solver :solve:
+*** given a real world problem, select an appropriate representation or combination/pipeline of representations :design:
+* Structure
+- study pods of six people
+  - discussing work okay, coding together/side by side not ok
+  - discussing bugs ok, fixing each other's bugs not ok
+- same gitlab team
+- repo per person (all assignments in one repo)
+- separate branch for each assignment (already configured in origin)
+- assigned peer review rotates through group? Or do it more freeform
+- submitter should open pull and seek feedback no later than halfway point, or take penalty; reviewer should submit review before end point or take penalty (unless submitter failed to submit on time, in which case reviewer must submit review within week of submitter's first submission)
+  - other forms of in flow review also fine but must be documented somehow
+  - reviewer submits evidence of review to Sakai
+- submitter submits commit hash and PR link to Sakai
+- or, lighter weight pair programming version:
+  - pairs rotate through pod
+  - check out repo per assignment
+  - each pair member reviews (and documents/tests/puts comments into?) another pair's code closely, for 10% credit (passable) and up to 10% extra credit (superb).  In flow not necessary, but must be done within one week of submission deadline.
+* Homework
+- each assignment has pre and post analysis
+  - pre analysis is done in class and then in pod
+  - post analysis is done in pod and then in class (pod level to avoid double jeopardy)
+  - both are individual submissions
+- analysis is worth 30%, no makeups
+- autograder is worth 60%, may be completed anytime before end of semester; partial credit on request with detailed explanation showing conceptual understanding
+- peer review is remaining 10%
+- code similarity checker??
+* Weekly summaries
+** What did we talk about
+** What is it for
+** How did it work
+** What is an unexamined assumption/weakness
+** Relate it to something we've seen earlier (?)
+** How could you generalize it to X
+* Review flow
+** Show your own feedback on >2 peers in your group
+** explain how your work changed in response to feedback
+** Easiest way to achieve this is to use merge requests and submit WIP
+*** Each assignment recommends some "stopping points" natural for peer review
+** Graded on autograder (40/20 initial/final), writeups (15/15), and did you do and respond to reviews (easy 5/5%)
+* Syllabus
+- Where sensible, ask pods to present on small topics contained within specific topic days.
+- Try to have an exercise for every day, keep lecture to 30-40min
+- hopefully some empty space for catchup/filler days
+** What is AI anyway
+- And why Games to study it
+*** Exercise: one exciting possibility, one terrifying prospect, and one goofy application
+*** Exercise: time constraints on the books. Email me if your schedule changes.
+*** Git/gitlab primer: homework for friday is clone repo and email me link to your fork
+*** Overview of things you'll learn and resources to learn them
+** HW (1w): ASP House                                                           :apply:
+Eval by secret test, weak constraint at a time
+** S for S 0: Specifying problems with First order logic programs
+- how to install clingo
+- Pokémon example (from a pool of Pokémon against a rival team, can I pick a team with no weaknesses? With 1? With k?)
+- discussion: what's a non game application of this kind of constraint solving?  Maybe some problem in business or building a computer or construction or event planning or airline flight scheduling or...?
+- example: pod assignment example (get me your times right away!!)
+- exercise/discussion: how could you extend the example to handle course scheduling for all four years?  E.G. to guarantee that you have a semester available for study abroad or to take a certain course before your senior year?
+- hw1 overview
+** Satisfaction for Synthesis 1: Who needs an algorithm? ASP in depth
+- world gen example for hw1 including reachability
+- reveal some of how asp works
+  - grounding (example from world gen)
+  - conversion to CNF
+  - DPLL outline
+  - exercise: derive main rules of Boolean constraint propagation
+- Encoding tips
+  - nqueens
+  - traveling salesperson
+** S for S 2: Constraint Satisfaction in General, with examples
+- generalized not just Boolean constraint propagation; e.g. equality constraints vs Boolean
+  - exercise: what input would you need if you replaced BCP in DPLL with, say, equality constraint propagation? Since CNF is only Boolean variables...
+- interval logics and craft
+- exercise: rpg character builder/party composition
+- Example: SW package version dependency management
+- hw2 intro
+*** Optional reading: AIMA CSP chapter
+** HW (2w): Rust CRAFT RNG (todo break into two)                                :solve:
+- Trying combinations but not impossible ones.  Craft/interval logic might actually be better than a full FD solver.
+- Include horswill reading
+- Figure out how to make it a good 2w assignment or make it 1 and move another 1 right after it (generalized constraint propagation? Or bring back dungeon room analyzer?)
+- eval interval propagators and overall rng by prop test, no secrets
+** S for S 3: Implementing Constraint Propagation in Rust 1
+- how to install rust; refer to mentor sessions for ide setup
+- Rust syntax overview
+- examples: hello world, fizz buzz, very naive combinatorial solver
+- exercise/discuss: similarities/differences from other PLs
+- how to find documentationjj
+*** Reading: Rust book
+** S for S 4: Implementing Constraint Propagation in Rust 2
+- example: dpll in rust
+- exercise this time is question prompting, even "how would I look this up" or "what does this compiler error mean"
+** S for S 5: Propagators as Data: CHR (maybe skip)
+- what is CHR
+- example: craft
+  - identify propagators
+  - identify simplifications
+- example: graph grammars for dungeon generation
+- key question exercise: ordering of choices, committed choice
+** HW (2w) (skip): Rust CHR and Graph Grammars for Zelda Missions (todo break into two) :solve:apply:
+Transformational creativity via pattern matching; controllable generation by construction
+** Interlude: ethical topics (pod)
+Fox Harrell and Nicky case and Gillian and other AI ontology readings
+** HW (7d) (skip?): Dungeon Solver in ASP                                       :solve:apply:
+- Maybe individual rooms with ASP, whole dungeon with planning in rust?  Or just whole thing in asp.  If former, have to have a class about integrating the two.  Use built in incmode.
+** S for D 1: Classical Planning (maybe two lectures, maybe second one pod)
+We can constrain our representation some to sets of fluents (looks similar to CHR?) and obtain specific algorithms.
+
+- example: Minecraft crafting but maybe add locations for resource extraction/table/etc (home/forest/cave/...)
+- exercise: make a domain
+- show naive backtracking planning algorithm
+- discuss possible problems and enhancements
+- really should introduce plan graphs or delete heuristic as a way to bias the naive BT maybe
+  - show partial order planning idea?
+** HW (2w): Iterative widening craft planning (todo break into two)             :solve:
+- phase 1 is planning representation in terms of fluents; strips style.  Planner inner loop should be iterative deepening or else dfs with loop prevention
+- phase 2 is IW for pruning; drop loop prevention overhead?
+- maybe not craft planning but another domain? Dungeon solving is too easy, need something with faux progress...  or just keep crafting
+- consider comparing "delete heuristic" vs IW vs both??  Maybe a version of delete heuristic that is a deepening search?  Or use ASP to calculate a relaxed plan graph for heuristic?
+- eval by ensuring all plans are valid via proptest; also bits of IW; check visit counts of iw vs dfs
+** S for D 2: Pruning and Iterative Widening
+- exercise: how to avoid infinite cycles in naive backtracking?  Come up with more than one way
+- cycle checking; iterative deepening; ...
+- introduce IW as a pruning strategy for any planning algorithm
+- insight: carry novelty information across branches of the search
+- example: IW fluent combinations and novelty measures for a few layers of a search tree on a domain from last lecture
+- exercise/discussion: what are some other ways we could prune off areas of the search in general or for the specific domain of Minecraft?
+** Satisfaction for Dynamics 3: Dynamics, Statically (ASP)
+- discussion: how is CHR like a planning problem? How is it like a synthesis problem?
+  - CHR is kind of like finding a sequence of rule applications that gives a desired result.
+  - even though the result is just an instantaneous assignment, the process is intrinsically about selecting a sequence of operators--this is a dynamics approach to the synthesis problem of CSP!
+- two key characteristics of dynamics problems:
+  - unfold a transition relation over don't know how many steps ("unbounded search")
+  - different orderings of steps are different "solutions" but may or may not be interestingly different
+- we can also solve dynamics problems in "one shot" as if we were just synthesizing a plan
+  - example: derive the planning problem in ASP.
+  - exercise: how to handle planning of unknown horizon
+** Interlude: final projects and pitching
+- What projects are, what they are about, how graded
+- Project pitching and team formation can happen here
+** Satisfaction for Agents 1: Seeing less to do more (pod?)
+- Talk about shift from rule based agents with perfect knowledge (and poor generalization) to local reasoning a la Agre.  Start with Braitenberg vehicles, but note danger of anthropomorphization!
+  - exercise: get students to invent the more complex vehicles and explain their behavior, especially if allowed multiple types of light
+- turtles termites and traffic jams? multi agent emergent group intelligence
+  - examples of agents with "smell" and trails
+- steering behaviors
+  - exercise: anticipate behavior given rule, come up with rule given behavior
+** S for A 2: Stateful Agents via Behavior Trees (pod?)
+- Example: the agent who can be made to drop their keys, or whatever.
+- For a non adventure flavored example, theorize a Mario agent with a local neighborhood view but no memory; complex to handle e.g. "I should be making a running long jump"
+- exercise: a few cooperating agents for some domain
+- discussion: integrating BTs with planning
+** S for A 3 (if skipping reactive game control hw): reactive controller lab
+Live code Mario AI agent together
+
+- discuss strategies before beginning coding
+- need a good harness, auto reloading or rapid play would be good
+** HW (1w) (skip): Controlling a video game reactively                          :design:solve:apply:
+- Come up with a vision solution or sufficient ram info so students can control Mario reactively
+  - or just give sprite and tile images and imgproc's template matching, and a MxN pixel region around the player avatar, and say "glhf"
+- Could be BT or stateless rules or state machine
+  - only variables are local area and character velocities
+  - only memory allowed is finite state machine state or whatever
+- measure highest score, farthest traveled/completion time
+- very short decision time threshold
+- eval only via thresholds on performance
+** Wrapping up Satisfaction: Critical technical practice
+- Agre
+- include pengo material from c&he?
+- how to frame it? Again
+*** TODO Pick a research problem or three and pose to students, ask teams to figure out how to frame it
+Synthesis or dynamic?  Probably must be satisfaction
+
+Asp or planning or chr or...?
+**** Problem: prove a program correct, program given as a transition system.  Should be doable either statically or via abstract interpretation
+**** Problem: lay out furniture in a room or related task
+**** Problem: transform a plan from one domain to another
+**** Problem: conformant planning (sensing actions/conditionals, actions may go wrong)
+**** Discuss afterwards in mini presentations
+** HW (7-10d) (skip?): embedding mission graphs onto space with soft constraints :apply:design:
+- given a mission graph
+- figuring out the room graph
+- generating room grids too, maybe wfc under constraints ?  Or save for P4S?
+** HW (2w): metric craft planning in asp three ways                             :apply:
+- one recipe per tick encoding (outline in class?)
+- multiple invocations of a recipe per tick
+- multiple recipes per tick
+- eval by secret, weak constraints; locally test whether plans are plans
+
+Could also do SDV farm layout or activity allocation (time energy money) as a static problem, maybe in class example?  Then could move O for D 1 forward past O for S.
+** O for S...: Optimizing CSPs modeling
+- priorities and preferences
+*** Optimization vs satisfaction
+*** Notions of optimality
+**** Single number
+**** Weighted sum
+**** Lexicographic
+**** Pareto optimality
+*** Discussion: consider some asp problems we solved as sat for synth, can we reframe them as opt for synth?
+*** Example: Modeling in ASP
+*** Opt more natural than sat in some cases
+**** Weak constraints as useful info
+*** Exercise: optimality and linear programming
+** O for D...: Metric planning by CSP
+- note detour to D today
+- Motivate with crafting or another example
+- ASP minimize/maximize
+- Maybe ASP $gringo syntax or &clingo[lp] if necessary
+- note we still need a bound on number of planning steps in asp land because of grounding
+- exercise in comparing metrics for same planning problem
+- exercise in using metrics to guide search in planning
+** O for S...: Optimizing CSPs implementation (pod?)
+- optimization with and without search
+- example: greedy -- fine if convex!
+- example: branch and bound
+- exercise: using possibly suboptimal solutions to bound objective value as an additional constraint
+  - kind of like s for d.... :thaenking:
+** O for S ...: Local search (maybe two days; one pod?)
+- example: random walk sat
+- min conflicts nqueens
+  - discussion: why does this work well for some problems?  Talk about solution space density vs possibility space
+- evolutionary search ; kate’s arrays of floats
+  - example: pick one of Kate's
+  - exercise: given a problem encode genome, crossover, utility
+** O for D...: Metric planning by graph search
+- examples: Show dijkstra by cost, then best first with delete heuristic; also have to show what delete heuristic is!!!
+  - exercise: sketch dijkstra order vs best first order on a graph
+- configuration state search is similar to but different from ordering of variables
+** HW (2w): pathing lab (todo break into two pieces)                            :solve:
+- Low resolution and high resolution grids and nav mesh decompositions, 4 and 8 connected, small medium large, with and without teleportals, door switches, ...
+- implement discrete: a*, jps
+- hybrid: nav mesh
+- continuous: rrt
+- ask: how to apply this to the Minecraft crafting domain?  How would A* do?
+- eval by prop tests; compare navmesh vs given fine grained a* implementation (in secret?); rrt just ensure we get paths and check implementation of bits like nearest neighbor. JPS should enqueue fewer nodes than a*
+** O for D...: Path planning 1 (pod?)
+- discussion: grid to graph
+- dijkstra on grids
+- best first in grids
+- exercise: movement costs?
+- Best first + dijkstra = A*
+- discussion: optimality of each
+  - what if heuristic is: exact; underestimate; uninformative; overestimate
+** O for D...: Path planning 2 (pod?)
+- JPS, fringe search, point to other variants
+- Exercises?
+** O for D...: path planning 3 (pod?)
+Hierarchical path planning (first by room then by navmesh) and navmesh decomposition
+** O for D...: motion planning
+PRM/RRT, return of local search; nearest neighbor lookup
+** O for D...: Zhan et al RRT, go-explore (pod?)  (skip?)
+** O for A ...: Utility and Simulation (pod?)
+- CiF/prom week
+- multi agent?
+** O for A ...: Simulation 2 (pod?)
+- Agents with beliefs
+- abl? Planning as authoring tool
+** HW (1w): chasing based on beliefs about likelihood                           :solve:
+- eval bits of it by proptest
+** Wrapping up optimization
+- Opt for sat: best first search, primal dual methods in LP, ...
+- sat for opt: find solution of cost k, k+1, ... many iterative methods;  satplan
+- how to frame it? 3
+*** TODO How to frame it?
+**** Zelda dungeon playing agent
+Note how your assumptions about input data and representations change the answer
+**** Pathfinding under mixed preferences: accessible navigation
+**** Mixed task and path planning (automated rover?)
+**** Hyped rrt dimensionality reduction via abstract interpretation
+** TODO Interlude: ethical topics (pod)
+Optimization versus varied human behavior; reducing human experience to numbers; paperclip maximizers; optimizing for what's measurable.  Sources?
+** Prediction: reasoning under uncertainty
+- environments with uncertain outcomes for action or partially observed state
+- approaches:
+  - reactivity
+  - expectation maximization
+- where do models come from?
+** P for S: probabilistic/fuzzy logic (pod?)
+** HW (1w): wfc in asp
+- either in asp or chr
+- rule learning in rust; generating asp as text is fine
+- do I care about distribution of tiles in the output?  Nah
+- eval in secret but do give checker to ensure plans are plans
+** P for S: regression and function approximation 1
+- example: linear regression
+- example: lease squares
+- hey, this is just optimization
+- example: k means/k medoids
+** P for S: regression and function approximation 2 (pod)
+- example: learning by stochastic gradient descent
+- example: perceptrons
+** P for D: General game playing via minimax (pod?)
+- minimax is the P part
+** P for D: MCTS (pod?)
+** HW (1w): mpc Mario
+- same sw setup as before (know enemy positions and velocities, self position and velocity, nearby tiles)
+- students come up with model, hinted to use A* or variant (but: how do you suppose you should handle enemies' movements?)
+- compare vs rule agents if I don't stop reactive agent AI
+- more generous timeout threshold
+- if I drop reactive agent AI, consider swapping out openai for a (pure rust?) alternative that does not require porting or extra build steps
+- eval bits by tests and by performance threshold
+** P for A: Model predictive control
+** Ethical topics: ML (pod)
+On prediction/ML/the role of automated decision making; unfairness by algorithm; Gary Smith; etc.  prediction vs privacy.  Optimization vs autonomy.  Copyright over models, over outputs of models.
+** P for A: Replanning/reactive planning (pod?)
+- anytime algorithms
+- plan repair
+- ...
+** P for A: RL (pod?)
+** Wrapup; maybe another how to frame it
+* My projects for fall19
+** Clingo rs Windows
+ [2019-03-03 Sun 20:57]
+ Figure out if clingo-rs can be modified to build with cmake crate and if it works on windows
+
+ + Windows needs cmake install and visual studio
+ + modify sys crate to checkout master and then checkout the libgringo/gen files (or wait for 5.3.1 release)
+ + also see if i need to use if cfg!(msvc) for some options/flags (not necessary if switching to cmake)
+ + if switching to cmake, define no python or lua build and copy .a files from build directory to install directory; use libclingo target and build static library too
+ + students will probably need clingo binaries anyway unless I give a driver program
+
+ Note: the above will work but I actually don't care or need it, binaries alone are fine.
+** DONE Figure out binding openai-gym to rust using bindgen; ensure builds on windows
+   SCHEDULED: <2019-03-13 Wed>
+ [2019-03-03 Sun 20:57]
++ download pypi wheel and extract libraries, can just put binaries into class directory (do this with clingo binaries too)
++ be sure to use mingw rust toolchain on Windows
++ see if bindgen can handle emulator and data modules
+   + if not then for sys crate may need a c++ shim defining c functions; a single .cpp file built by a build.rs script
++ then a nice rust module reimplementing relevant parts of python retro modules (mostly paths and initialization and gym interface?)
++ or just use pyo3...... and ask people to install python any which way or though miniconda
+
+
++ naaaaaaah this was lousy so I'm just gonna do a chintzy Rust libretro AI control frontend using libloading and provide cores and give out ROMs on Sakai
+* Final project ideas
+** Zelda dungeon generator, mission<->space
+** MegaMan AI
+** GVG-AI player or level generator or game generator
+** Rust AI crate
+** High performance rust planner
+** SDV or Minecraft build planner
+** Game state exploration and summarization
+** Social AI multi agent system
+** Expand on any HW project
+** Your choice
+*** Must have significant programming component
+* Lecture style
+** Try to make lectures all or almost all examples and exercises, just enough talking for setup/context
+** Use lecture notes for detailed explanations/reference/practiced examples
